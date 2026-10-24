@@ -1,0 +1,21 @@
+name: GitHub Concurrency
+
+on:
+    workflow_dispatch:
+
+jobs:
+    deploy_concurrency_job:
+        # job level concurrency, we can also use in workflow level
+        concurrency:
+            group: concurrency-job
+            cancel-in-progress: true
+
+        runs-on: ubuntu-latest
+
+        steps:
+            # repo level secrets and vars
+            - name: Docker Login
+              run: echo docker login --username=${{ vars.DOCKER_USERNAME }} --password=${{ secrets.DOCKER_PASSWORD }}
+
+            - name: Docker Build
+              run: echo docker build -t $CONTAINER_REGISTRY/${{vars.DOCKER_USERNAME}}/$IMAGE_NAME:latest

@@ -1,0 +1,14 @@
+name: Timeouts in Actions
+
+on: push
+
+jobs:
+    timeout-example:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Long Running Task
+              timeout-minutes: 1
+              # sleep for 1 hour
+              run: |
+                  echo "Long running task...."
+                  sleep 1h

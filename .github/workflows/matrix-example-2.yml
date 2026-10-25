@@ -22,7 +22,7 @@ jobs:
                 # this will include the job running an amd64/alpine in ubuntu-20.04
                 include:
                     - images: amd64/alpine
-                      os: ubuntu-20.04
+                      os: ubuntu-22.04
 
         runs-on: ${{ matrix.os }}
         steps:

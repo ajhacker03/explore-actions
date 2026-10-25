@@ -1,0 +1,33 @@
+name: Matrix Example
+
+on:
+    push:
+    workflow_dispatch:
+
+jobs:
+    matrix-job:
+        strategy:
+            fail-fast: false
+            max-parallel: 2
+            matrix:
+                # user defined variables below
+                os: [ubuntu-latest, ubuntu-20.04, windows-latest]
+                images: [hello-world, alpine]
+
+                # this will exclude the job running an alpine in windows machine
+                exclude:
+                    - images: alpine
+                      os: windows-latest
+
+                # this will include the job running an amd64/alpine in ubuntu-20.04
+                include:
+                    - images: amd64/alpine
+                      os: ubuntu-20.04
+
+        runs-on: ${{ matrix.os }}
+        steps:
+            - name: Echo Docker details
+              run: docker info
+
+            - name: Run Image on ${{ matrix.os }}
+              run: docker run ${{ matrix.images }}

@@ -1,4 +1,4 @@
-name: Matrix Example
+name: Matrix Example 2
 
 on:
     push:
@@ -7,7 +7,6 @@ on:
 jobs:
     matrix-job:
         strategy:
-            fail-fast: false
             max-parallel: 2
             matrix:
                 # user defined variables below

@@ -7,9 +7,11 @@ on:
 jobs:
     matrix-job:
         strategy:
+            fail-fast: false
+            max-parallel: 2
             matrix:
                 # user defined variables below
-                os: [ubuntu-latest, ubuntu-20.04, windows-latest]
+                os: [ubuntu-latest, ubuntu-22.04, windows-latest]
                 images: [hello-world, alpine]
 
                 # this will exclude the job running an alpine in windows machine
@@ -28,4 +30,4 @@ jobs:
               run: docker info
 
             - name: Run Image on ${{ matrix.os }}
-              run: docker run --rm ${{ matrix.images }}
+              run: docker run ${{ matrix.images }}

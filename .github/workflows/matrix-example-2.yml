@@ -7,7 +7,6 @@ on:
 jobs:
     matrix-job:
         strategy:
-            max-parallel: 2
             matrix:
                 # user defined variables below
                 os: [ubuntu-latest, ubuntu-20.04, windows-latest]
@@ -29,4 +28,4 @@ jobs:
               run: docker info
 
             - name: Run Image on ${{ matrix.os }}
-              run: docker run ${{ matrix.images }}
+              run: docker run --rm ${{ matrix.images }}

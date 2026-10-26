@@ -1,0 +1,19 @@
+name: Testing Expressions
+
+on: push
+
+jobs:
+    build_job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Echo Hello
+              run: echo Hello in build job
+
+    deploy_job:
+        # Runs only if the branch is main
+        if: github.ref == 'refs/heads/main'
+        needs: build_job
+        runs-on: ubuntu-latest
+        steps:
+            - name: Echo Hello
+              run: echo deploy in build job
